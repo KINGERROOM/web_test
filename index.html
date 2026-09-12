@@ -12,7 +12,7 @@ box-sizing: border-box;
 font-family: "PingFang SC", "Microsoft JhengHei", system-ui, -apple-system, sans-serif;
 }
 html {
-  scroll-behavior: smooth; /* 全頁平滑滾動 */
+  scroll-behavior: smooth;
 }
 :root {
 --primary: #ecb51f;
@@ -41,7 +41,6 @@ backdrop-filter: blur(10px);
 transition: background 0.4s ease, padding 0.4s ease;
 gap:1rem;
 }
-/* 滾動後導航樣式，JS觸發 */
 header.scrolled {
   background: rgba(15, 23, 42, 0.96);
   padding: 0.7rem 5%;
@@ -59,14 +58,36 @@ display: flex;
 gap: 2rem;
 list-style: none;
 }
+/* 導航項目 + 底線動畫 */
 nav a {
 color: #e2e8f0;
 text-decoration: none;
 font-weight: 500;
+position: relative;
 transition: color 0.25s ease;
+}
+nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-4px;
+  width:0;
+  height:2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
 }
 nav a:hover {
 color: #fff;
+}
+nav a:hover::after{
+  width:100%;
+}
+/* 當前頁面區塊高亮樣式 */
+nav a.active {
+  color: var(--primary);
+}
+nav a.active::after{
+  width:100%;
 }
 .contact-btn-header {
 padding: 0.6rem 1.2rem;
@@ -81,6 +102,16 @@ transition: background 0.25s ease, box-shadow 0.3s ease;
 .contact-btn-header:hover {
 background: var(--primary-dark);
 box-shadow: 0 0 12px rgba(236,181,31,0.5);
+}
+
+/* 漢堡選單按鈕 預設隱藏 */
+.hamburger {
+  display: none;
+  color:#fff;
+  font-size:1.8rem;
+  background:transparent;
+  border:none;
+  cursor:pointer;
 }
 
 /* ===== 語言下拉選單樣式 ===== */
@@ -124,7 +155,7 @@ box-shadow: 0 0 12px rgba(236,181,31,0.5);
   display:block;
 }
 
-/* ===== Hero 互動橫幅：使用 <img> 作背景 ===== */
+/* ===== Hero 互動橫幅 ===== */
 .hero {
 position: relative;
 min-height: 100vh;
@@ -136,7 +167,6 @@ color: #fff;
 padding: 7rem 5% 5rem;
 overflow: hidden;
 }
-/* 背景圖片標籤 */
 .hero-bg-img {
 position: absolute;
 top: 0;
@@ -146,7 +176,6 @@ height: 100%;
 object-fit: cover;
 z-index: -2;
 }
-/* 暗色遮罩，確保文字清晰 */
 .hero-overlay {
 position: absolute;
 inset: 0;
@@ -161,7 +190,6 @@ opacity:0;
 transform: translateY(30px);
 animation: fadeUp 1.2s ease forwards;
 }
-/* Hero 文字動畫 */
 @keyframes fadeUp {
   to {
     opacity:1;
@@ -279,7 +307,6 @@ font-size: 1.5rem;
 margin-bottom: 1rem;
 transition: transform 0.4s ease;
 }
-/* 滑鼠放上去，emoji 360度旋轉 */
 .service-card:hover .service-icon{
   transform: rotate(360deg);
 }
@@ -293,7 +320,13 @@ color: var(--gray);
 line-height: 1.7;
 }
 
-/* ===== 互動即時聯絡彈窗 ===== */
+/* ===== 為什麼選擇本元 ===== */
+#whyus {
+padding:5rem 5%;
+background:#f1f5f9;
+}
+
+/* ===== 聯絡彈窗 ===== */
 .modal-wrap {
 position: fixed;
 inset: 0;
@@ -383,42 +416,74 @@ color: #cbd5e1;
 text-align: center;
 }
 
-/* ===== 手機版 ===== */
+/* ===== 手機媒體查詢 ===== */
 @media (max-width: 768px) {
-nav ul {
-display: none;
-}
-.lang-dropdown{
-  display:none;
-}
-.hero h1 {
-font-size: 2.2rem;
-}
-.hero-action {
-flex-direction: column;
-align-items: center;
-}
-.hero-btn {
-width: 100%;
-max-width: 320px;
-}
+  /* 電腦橫向導航隱藏 */
+  nav ul {
+    position: fixed;
+    top:0;
+    right:-100%;
+    height:100vh;
+    width:260px;
+    background:rgba(15,23,42,0.98);
+    flex-direction:column;
+    padding:6rem 2rem;
+    transition:right 0.3s ease;
+    display:flex;
+  }
+  /* 開啟狀態，側邊滑入 */
+  nav ul.mobile-open{
+    right:0;
+  }
+  .hamburger{
+    display:block;
+    z-index:101;
+  }
+  .lang-dropdown{
+    display:none;
+  }
+  .hero h1 {
+  font-size: 2.2rem;
+  }
+  .hero-action {
+  flex-direction: column;
+  align-items: center;
+  }
+  .hero-btn {
+  width: 100%;
+  max-width: 320px;
+  }
 }
 </style>
 </head>
 <body>
-<!-- 導航欄 -->
 <header>
 <div class="logo" data-i18n="logo">本元<span>物理治療</span></div>
 <nav>
 <ul>
-<li><a href="#home" data-i18n="nav_home">首頁</a></li>
-<li><a href="#services" data-i18n="nav_service">核心服務t</a></li>
-<li><a href="#whyus" data-i18n="nav_why">為什麼選擇本元</a></li>
-<li><a href="#about" data-i18n="nav_about">關於我們</a></li>
-<li><a href="#portfolio" data-i18n="nav_case">案例</a></li>
+  <!-- 原本頁內錨點寫法，註釋保留 -->
+  <!-- <li><a href="#home" data-i18n="nav_home">首頁</a></li> -->
+  <li><a href="" data-i18n="nav_home">首頁</a></li>
+
+  <!-- <li><a href="#services" data-i18n="nav_service">核心服務</a></li> -->
+  <li><a href="" data-i18n="nav_service">核心服務</a></li>
+
+  <!-- <li><a href="#whyus" data-i18n="nav_why">為什麼選擇本元</a></li> -->
+  <li><a href="" data-i18n="nav_why">為什麼選擇本元</a></li>
+
+  <!-- <li><a href="#about" data-i18n="nav_about">關於我們</a></li> -->
+  <li><a href="" data-i18n="nav_about">關於我們</a></li>
+
+  <!-- <li><a href="#portfolio" data-i18n="nav_case">案例</a></li> -->
+  <li><a href="" data-i18n="nav_case">案例</a></li>
+
+  <!-- 新增：聯絡我們 -->
+  <!-- <li><a href="#contact" data-i18n="nav_contact_menu">聯絡我們</a></li> -->
+  <li><a href="" data-i18n="nav_contact_menu">聯絡我們</a></li>
 </ul>
 </nav>
-<!-- 語言下拉選單 -->
+<!-- 漢堡按鈕 -->
+<button class="hamburger">☰</button>
 <div class="lang-dropdown">
   <button class="lang-btn">🌐 語言 ▾</button>
   <div class="lang-menu">
@@ -429,9 +494,8 @@ max-width: 320px;
 </div>
 <button class="contact-btn-header" onclick="openModal()" data-i18n="nav_contact">即時聯絡</button>
 </header>
-<!-- Hero 互動橫幅：改用img標籤載入背景圖 -->
+
 <section class="hero" id="home">
-<!-- 下面這行就是img，修改src寫你的圖片檔名 -->
 <img class="hero-bg-img" src="banner.jpg" alt="物理治療診所背景">
 <div class="hero-overlay"></div>
 <div class="hero-content">
@@ -443,10 +507,10 @@ max-width: 320px;
 </div>
 </div>
 </section>
-<!-- 核心服務 -->
+
 <section class="services" id="services">
 <div class="section-title">
-<h2 data-i18n="service_title">核心服務test</h2>
+<h2 data-i18n="service_title">核心服務</h2>
 <p data-i18n="service_sub">針對不同痛症與機能障礙，提供專業物理治療服務</p>
 </div>
 <div class="service-grid">
@@ -470,7 +534,6 @@ max-width: 320px;
 <h3 data-i18n="s4_title">一對一評估諮詢</h3>
 <p data-i18n="s4_desc">詳細檢查身體狀況，找出痛症根源，定制個人化治療方案。</p>
 </div>
-<!-- 新增項目 -->
 <div class="service-card">
 <div class="service-icon">🏥</div>
 <h3 data-i18n="s5_title">術後康復</h3>
@@ -489,15 +552,13 @@ max-width: 320px;
 </div>
 </section>
 
-<!-- 為什麼選擇本元 區塊（你後續可以再美化內容） -->
-<section id="whyus" style="padding:5rem 5%;background:#f1f5f9;">
+<section id="whyus">
   <div class="section-title">
     <h2 data-i18n="why_title">為什麼選擇本元</h2>
     <p data-i18n="why_sub">專業團隊、個人化方案，用心守護每一位客人健康</p>
   </div>
 </section>
 
-<!-- 互動即時聯絡彈窗 -->
 <div class="modal-wrap" id="contactModal">
 <div class="modal">
 <h3 data-i18n="modal_title">即時聯絡諮詢</h3>
@@ -524,6 +585,7 @@ const i18n = {
     nav_why:"為什麼選擇本元",
     nav_about:"關於我們",
     nav_case:"案例",
+    nav_contact_menu:"聯絡我們",
     nav_contact:"即時聯絡",
     hero_title:"專業物理治療，<br/>守護你的<span>活動健康</span>",
     hero_desc:"本元物理治療，透過專業復健評估與治療方案，舒緩痛症、恢復機能，幫助你重拾日常活動能力。",
@@ -563,6 +625,7 @@ const i18n = {
     nav_why:"为什么选择本元",
     nav_about:"关于我们",
     nav_case:"案例",
+    nav_contact_menu:"联系我们",
     nav_contact:"即时联络",
     hero_title:"专业物理治疗，<br/>守护你的<span>活动健康</span>",
     hero_desc:"本元物理治疗，透过专业复健评估与治疗方案，舒缓痛症、恢复机能，帮你重拾日常活动能力。",
@@ -602,6 +665,7 @@ const i18n = {
     nav_why:"Why BenYuan",
     nav_about:"About Us",
     nav_case:"Cases",
+    nav_contact_menu:"Contact Us",
     nav_contact:"Contact Us",
     hero_title:"Professional Physiotherapy,<br/>Safeguard Your <span>Mobility & Health</span>",
     hero_desc:"BenYuan Physiotherapy provides professional assessment and treatment to relieve pain and restore physical function.",
@@ -649,18 +713,31 @@ function setLang(langKey){
   document.documentElement.lang = langKey;
 }
 
-// 下拉選單點擊開關
+// 漢堡選單控制
+const hamburgerBtn = document.querySelector('.hamburger');
+const navMenu = document.querySelector('nav ul');
+hamburgerBtn.addEventListener('click', ()=>{
+  navMenu.classList.toggle('mobile-open');
+})
+// 點擊導航連結後，自動關閉手機選單
+document.querySelectorAll('nav a').forEach(link=>{
+  link.addEventListener('click',()=>{
+    navMenu.classList.remove('mobile-open');
+    // 原本頁內平滑滾動程式碼，註釋停用
+    // document.querySelector(link.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+  })
+})
+
+// 語言下拉控制
 const langDropdown = document.querySelector(".lang-dropdown");
 const langBtn = document.querySelector(".lang-btn");
 langBtn.addEventListener("click",(e)=>{
   e.stopPropagation();
   langDropdown.classList.toggle("open");
 })
-// 點畫面其他地方關閉下拉
 document.addEventListener("click",()=>{
   langDropdown.classList.remove("open");
 })
-// 點選語言
 document.querySelectorAll(".lang-menu a").forEach(item=>{
   item.addEventListener("click",(e)=>{
     e.preventDefault();
@@ -674,17 +751,37 @@ const modal = document.getElementById("contactModal");
 const header = document.querySelector("header");
 const serviceCards = document.querySelectorAll('.service-card');
 const sectionTitle = document.querySelector('.section-title');
+// 導航連結清單，用於滾動偵測高亮
+const navLinks = document.querySelectorAll("nav a");
+const sections = document.querySelectorAll("section[id]");
 
-// 導航欄滾動效果
+// 導航欄滾動背景變化
 window.addEventListener('scroll',()=>{
   if(window.scrollY > 50){
     header.classList.add('scrolled');
   }else{
     header.classList.remove('scrolled');
   }
+
+  // 滾動偵測：自動高亮當前章節導航
+  let current = "";
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    if (window.scrollY >= (sectionTop - 200)) {
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    // 因為現在是跨頁面，這段高亮功能會失效，可以之後再處理
+    if(link.getAttribute("href") === "#"+current){
+      link.classList.add("active");
+    }
+  })
 })
 
-// 滾動偵測，服務卡片淡入
+// 滾動動畫觀察器
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
@@ -695,7 +792,7 @@ const observer = new IntersectionObserver((entries)=>{
 observer.observe(sectionTitle);
 serviceCards.forEach(card=>observer.observe(card));
 
-// 彈窗函數更新
+// 彈窗控制
 function openModal() {
     modal.classList.add('active');
 }
