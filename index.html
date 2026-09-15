@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>本元物理治療 | 首頁</title>
 <style>
 * {
@@ -10,9 +10,10 @@ margin: 0;
 padding: 0;
 box-sizing: border-box;
 font-family: "PingFang SC", "Microsoft JhengHei", system-ui, -apple-system, sans-serif;
+-webkit-tap-highlight-color: transparent; /* 移除手機點擊灰塊 */
 }
 html {
-  scroll-behavior: smooth;
+scroll-behavior: smooth;
 }
 :root {
 --primary: #ecb51f;
@@ -42,8 +43,15 @@ transition: background 0.4s ease, padding 0.4s ease;
 gap:1rem;
 }
 header.scrolled {
-  background: rgba(15, 23, 42, 0.96);
-  padding: 0.7rem 5%;
+background: rgba(15, 23, 42, 0.96);
+padding: 0.7rem 5%;
+}
+.logo-wrap{
+display:flex;
+align-items:center;
+gap:0.7rem;
+cursor:pointer;
+text-decoration:none;
 }
 .logo {
 font-size: 1.5rem;
@@ -52,6 +60,12 @@ color: #fff;
 }
 .logo span {
 color: var(--primary);
+}
+/* 自訂LOGO圖片 放在文字右邊 */
+.logo-img{
+height:36px;
+width:auto;
+object-fit:contain;
 }
 nav ul {
 display: flex;
@@ -67,27 +81,27 @@ position: relative;
 transition: color 0.25s ease;
 }
 nav a::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-4px;
-  width:0;
-  height:2px;
-  background: var(--primary);
-  transition: width 0.3s ease;
+content:"";
+position:absolute;
+left:0;
+bottom:-4px;
+width:0;
+height:2px;
+background: var(--primary);
+transition: width 0.3s ease;
 }
 nav a:hover {
 color: #fff;
 }
 nav a:hover::after{
-  width:100%;
+width:100%;
 }
 /* 當前頁面區塊高亮樣式 */
 nav a.active {
-  color: var(--primary);
+color: var(--primary);
 }
 nav a.active::after{
-  width:100%;
+width:100%;
 }
 .contact-btn-header {
 padding: 0.6rem 1.2rem;
@@ -103,58 +117,56 @@ transition: background 0.25s ease, box-shadow 0.3s ease;
 background: var(--primary-dark);
 box-shadow: 0 0 12px rgba(236,181,31,0.5);
 }
-
 /* 漢堡選單按鈕 預設隱藏 */
 .hamburger {
-  display: none;
-  color:#fff;
-  font-size:1.8rem;
-  background:transparent;
-  border:none;
-  cursor:pointer;
+display: none;
+color:#fff;
+font-size:1.8rem;
+background:transparent;
+border:none;
+cursor:pointer;
+padding: 0.5rem; /* 加大手機觸控區域 */
 }
-
 /* ===== 語言下拉選單樣式 ===== */
 .lang-dropdown {
-  position: relative;
+position: relative;
 }
 .lang-btn {
-  color:#e2e8f0;
-  background:transparent;
-  border:1px solid rgba(255,255,255,0.3);
-  padding:0.4rem 0.8rem;
-  border-radius:6px;
-  cursor:pointer;
-  font-size:0.9rem;
+color:#e2e8f0;
+background:transparent;
+border:1px solid rgba(255,255,255,0.3);
+padding:0.4rem 0.8rem;
+border-radius:6px;
+cursor:pointer;
+font-size:0.9rem;
 }
 .lang-btn:hover{
-  color:#fff;
-  border-color:rgba(255,255,255,0.7);
+color:#fff;
+border-color:rgba(255,255,255,0.7);
 }
 .lang-menu{
-  position:absolute;
-  top:120%;
-  right:0;
-  background:#fff;
-  border-radius:8px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.15);
-  overflow:hidden;
-  display:none;
+position:absolute;
+top:120%;
+right:0;
+background:#fff;
+border-radius:8px;
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+overflow:hidden;
+display:none;
 }
 .lang-menu a{
-  display:block;
-  padding:0.6rem 1rem;
-  color:#333;
-  text-decoration:none;
-  white-space:nowrap;
+display:block;
+padding:0.6rem 1rem;
+color:#333;
+text-decoration:none;
+white-space:nowrap;
 }
 .lang-menu a:hover{
-  background:#f1f5f9;
+background:#f1f5f9;
 }
 .lang-dropdown.open .lang-menu{
-  display:block;
+display:block;
 }
-
 /* ===== Hero 互動橫幅 ===== */
 .hero {
 position: relative;
@@ -192,8 +204,8 @@ animation: fadeUp 1.2s ease forwards;
 }
 @keyframes fadeUp {
   to {
-    opacity:1;
-    transform: translateY(0);
+opacity:1;
+transform: translateY(0);
   }
 }
 .hero h1 {
@@ -245,7 +257,6 @@ background: rgba(255, 255, 255, 0.12);
 transform: translateY(-3px);
 box-shadow: 0 8px 20px rgba(255,255,255,0.15);
 }
-
 /* ===== 核心服務 ===== */
 .services {
 padding: 5rem 5%;
@@ -259,8 +270,8 @@ transform: translateY(20px);
 transition: 0.8s ease;
 }
 .section-title.show{
-  opacity:1;
-  transform: translateY(0);
+opacity:1;
+transform: translateY(0);
 }
 .section-title h2 {
 font-size: 2.2rem;
@@ -287,8 +298,8 @@ opacity:0;
 transform: translateY(40px);
 }
 .service-card.show {
-  opacity:1;
-  transform: translateY(0);
+opacity:1;
+transform: translateY(0);
 }
 .service-card:hover {
 transform: translateY(-8px);
@@ -308,24 +319,23 @@ margin-bottom: 1rem;
 transition: transform 0.4s ease;
 }
 .service-card:hover .service-icon{
-  transform: rotate(360deg);
+transform: rotate(360deg);
 }
 .service-card h3 {
 font-size: 1.3rem;
 margin-bottom: 0.6rem;
 color: var(--dark);
 }
-.service-card p {
-color: var(--gray);
-line-height: 1.7;
+.service-card ul{
+padding-left:1.2rem;
+color:var(--gray);
+line-height:1.7;
 }
-
 /* ===== 為什麼選擇本元 ===== */
 #whyus {
 padding:5rem 5%;
 background:#f1f5f9;
 }
-
 /* ===== 聯絡彈窗 ===== */
 .modal-wrap {
 position: fixed;
@@ -340,8 +350,8 @@ opacity:0;
 transition: opacity 0.35s ease;
 }
 .modal-wrap.active{
-  display:flex;
-  opacity:1;
+display:flex;
+opacity:1;
 }
 .modal {
 background: #fff;
@@ -354,7 +364,7 @@ transform: scale(0.85);
 transition: transform 0.35s ease;
 }
 .modal-wrap.active .modal{
-  transform: scale(1);
+transform: scale(1);
 }
 .modal h3 {
 margin-bottom: 1.2rem;
@@ -391,7 +401,7 @@ font-weight: 600;
 transition: background 0.25s ease, transform 0.2s ease;
 }
 .modal button:active{
-  transform: scale(0.96);
+transform: scale(0.96);
 }
 .submit {
 background: var(--primary);
@@ -407,7 +417,6 @@ color: var(--dark);
 .close:hover {
 background: #cbd5e1;
 }
-
 /* ===== 底部 ===== */
 footer {
 padding: 2rem 5%;
@@ -415,86 +424,89 @@ background: var(--dark);
 color: #cbd5e1;
 text-align: center;
 }
-
-/* ===== 手機媒體查詢 ===== */
+/* ===== 手機媒體查詢｜優化手機體驗 ===== */
 @media (max-width: 768px) {
-  /* 電腦橫向導航隱藏 */
-  nav ul {
-    position: fixed;
-    top:0;
-    right:-100%;
-    height:100vh;
-    width:260px;
-    background:rgba(15,23,42,0.98);
-    flex-direction:column;
-    padding:6rem 2rem;
-    transition:right 0.3s ease;
-    display:flex;
+/* 電腦橫向導航隱藏 */
+nav ul {
+position: fixed;
+top:0;
+right:-100%;
+height:100vh;
+width:260px;
+background:rgba(15,23,42,0.98);
+flex-direction:column;
+padding:6rem 2rem;
+transition:right 0.3s ease;
+display:flex;
+gap:1.6rem; /* 加大手機導航項目垂直間距，方便點擊 */
   }
-  /* 開啟狀態，側邊滑入 */
-  nav ul.mobile-open{
-    right:0;
+/* 開啟狀態，側邊滑入 */
+nav ul.mobile-open{
+right:0;
   }
-  .hamburger{
-    display:block;
-    z-index:101;
+.hamburger{
+display:block;
+z-index:101;
   }
-  .lang-dropdown{
-    display:none;
+.lang-dropdown{
+display:none;
   }
-  .hero h1 {
-  font-size: 2.2rem;
+.hero h1 {
+font-size: 2.2rem;
   }
-  .hero-action {
-  flex-direction: column;
-  align-items: center;
+.hero-action {
+flex-direction: column;
+align-items: center;
   }
-  .hero-btn {
-  width: 100%;
-  max-width: 320px;
+.hero-btn {
+width: 100%;
+max-width: 320px;
+padding:1rem; /* 加大手機按鈕高度，更容易點擊 */
+  }
+.logo-img{
+height:30px;
   }
 }
 </style>
 </head>
 <body>
 <header>
+<!-- 點擊整個logo區塊跳轉首頁，圖片在文字右邊 -->
+<a href="index.html" class="logo-wrap">
 <div class="logo" data-i18n="logo">本元<span>物理治療</span></div>
+<!-- 替換src為你的logo圖片路徑 -->
+<img class="logo-img" src="logo.png" alt="本元物理治療 Logo"style="opacity: 0.5;">
+</a>
 <nav>
 <ul>
-  <!-- 原本頁內錨點寫法，註釋保留 -->
-  <!-- <li><a href="#home" data-i18n="nav_home">首頁</a></li> -->
-  <li><a href="" data-i18n="nav_home">首頁</a></li>
-
-  <!-- <li><a href="#services" data-i18n="nav_service">核心服務</a></li> -->
-  <li><a href="" data-i18n="nav_service">核心服務</a></li>
-
-  <!-- <li><a href="#whyus" data-i18n="nav_why">為什麼選擇本元</a></li> -->
-  <li><a href="" data-i18n="nav_why">為什麼選擇本元</a></li>
-
-  <!-- <li><a href="#about" data-i18n="nav_about">關於我們</a></li> -->
-  <li><a href="" data-i18n="nav_about">關於我們</a></li>
-
-  <!-- <li><a href="#portfolio" data-i18n="nav_case">案例</a></li> -->
-  <li><a href="" data-i18n="nav_case">案例</a></li>
-
-  <!-- 新增：聯絡我們 -->
-  <!-- <li><a href="#contact" data-i18n="nav_contact_menu">聯絡我們</a></li> -->
-  <li><a href="" data-i18n="nav_contact_menu">聯絡我們</a></li>
+<!-- 原本頁內錨點寫法，註釋保留 -->
+<!-- <li><a href="#home" data-i18n="nav_home">首頁</a></li> -->
+<li><a href="" data-i18n="nav_home">首頁</a></li>
+<!-- <li><a href="#services" data-i18n="nav_service">核心服務</a></li> -->
+<li><a href="" data-i18n="nav_service">核心服務</a></li>
+<!-- <li><a href="#whyus" data-i18n="nav_why">為什麼選擇本元</a></li> -->
+<li><a href="" data-i18n="nav_why">為什麼選擇本元</a></li>
+<!-- <li><a href="#about" data-i18n="nav_about">關於我們</a></li> -->
+<li><a href="" data-i18n="nav_about">關於我們</a></li>
+<!-- <li><a href="#portfolio" data-i18n="nav_case">案例</a></li> -->
+<li><a href="" data-i18n="nav_case">案例</a></li>
+<!-- 新增：聯絡我們 -->
+<!-- <li><a href="#contact" data-i18n="nav_contact_menu">聯絡我們</a></li> -->
+<li><a href="" data-i18n="nav_contact_menu">聯絡我們</a></li>
 </ul>
 </nav>
 <!-- 漢堡按鈕 -->
 <button class="hamburger">☰</button>
 <div class="lang-dropdown">
-  <button class="lang-btn">🌐 語言 ▾</button>
-  <div class="lang-menu">
-    <a href="#" data-lang="zh-Hant">繁體中文</a>
-    <a href="#" data-lang="zh-CN">简体中文</a>
-    <a href="#" data-lang="en">English</a>
-  </div>
+<button class="lang-btn">🌐 語言 ▾</button>
+<div class="lang-menu">
+<a href="#" data-lang="zh-Hant">繁體中文</a>
+<a href="#" data-lang="zh-CN">简体中文</a>
+<a href="#" data-lang="en">English</a>
+</div>
 </div>
 <button class="contact-btn-header" onclick="openModal()" data-i18n="nav_contact">即時聯絡</button>
 </header>
-
 <section class="hero" id="home">
 <img class="hero-bg-img" src="banner.jpg" alt="物理治療診所背景">
 <div class="hero-overlay"></div>
@@ -502,12 +514,12 @@ text-align: center;
 <h1 data-i18n="hero_title">專業物理治療，<br/>守護你的<span>活動健康</span></h1>
 <p data-i18n="hero_desc">本元物理治療，透過專業復健評估與治療方案，舒緩痛症、恢復機能，幫助你重拾日常活動能力。</p>
 <div class="hero-action">
-<button class="hero-btn btn-primary" onclick="openModal()" data-i18n="hero_btn1">立即諮詢</button>
-<button class="hero-btn btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})" data-i18n="hero_btn2">探索服務</button>
+<!-- 修改：原本立即諮詢改成立即預約，a標籤直接跳轉booking.php，href留位置填絕對路徑 -->
+<a href="booking.php" class="hero-btn btn-primary" data-i18n="hero_btn1">立即預約</a>
+<button class="hero-btn btn-outline" onclick="scrollWithDelay()" data-i18n="hero_btn2">探索服務</button>
 </div>
 </div>
 </section>
-
 <section class="services" id="services">
 <div class="section-title">
 <h2 data-i18n="service_title">核心服務</h2>
@@ -517,48 +529,80 @@ text-align: center;
 <div class="service-card">
 <div class="service-icon">🦴</div>
 <h3 data-i18n="s1_title">肌肉骨骼痛症治療</h3>
-<p data-i18n="s1_desc">肩頸痛、腰背痛、關節痛，透過手法治療、儀器治療舒緩不適。</p>
+<ul data-i18n="s1_list">
+<li>肩頸痛</li>
+<li>腰背痛</li>
+<li>關節痛</li>
+<li>手法治療、儀器治療舒緩不適</li>
+</ul>
 </div>
 <div class="service-card">
 <div class="service-icon">🏃</div>
 <h3 data-i18n="s2_title">運動損傷復康</h3>
-<p data-i18n="s2_desc">拉傷、扭傷、術後復健，設計訓練計劃，逐步恢復運動能力。</p>
+<ul data-i18n="s2_list">
+<li>拉傷、扭傷</li>
+<li>術後復健</li>
+<li>設計個人訓練計劃</li>
+<li>逐步恢復運動能力</li>
+</ul>
 </div>
 <div class="service-card">
 <div class="service-icon">🧓</div>
 <h3 data-i18n="s3_title">長者平衡與防跌訓練</h3>
-<p data-i18n="s3_desc">改善肢體力量、平衡感，降低跌倒風險，維持自主生活能力。</p>
+<ul data-i18n="s3_list">
+<li>改善肢體力量</li>
+<li>提升平衡感</li>
+<li>降低跌倒風險</li>
+<li>維持自主生活能力</li>
+</ul>
 </div>
 <div class="service-card">
 <div class="service-icon">📋</div>
 <h3 data-i18n="s4_title">一對一評估諮詢</h3>
-<p data-i18n="s4_desc">詳細檢查身體狀況，找出痛症根源，定制個人化治療方案。</p>
+<ul data-i18n="s4_list">
+<li>詳細檢查身體狀況</li>
+<li>找出痛症根源</li>
+<li>定制個人化治療方案</li>
+</ul>
 </div>
 <div class="service-card">
 <div class="service-icon">🏥</div>
 <h3 data-i18n="s5_title">術後康復</h3>
-<p data-i18n="s5_desc">手術後關節與軟組織復康，加快恢復活動能力，減少後遺症。</p>
+<ul data-i18n="s5_list">
+<li>手術後關節復康</li>
+<li>軟組織復康</li>
+<li>加快恢復活動能力</li>
+<li>減少後遺症</li>
+</ul>
 </div>
 <div class="service-card">
 <div class="service-icon">👟</div>
 <h3 data-i18n="s6_title">鞋墊訂製</h3>
-<p data-i18n="s6_desc">足部評估，訂製矯正鞋墊，改善扁平足、高足弓、足底痛。</p>
+<ul data-i18n="s6_list">
+<li>足部專業評估</li>
+<li>訂製矯正鞋墊</li>
+<li>改善扁平足、高足弓</li>
+<li>舒緩足底痛</li>
+</ul>
 </div>
 <div class="service-card">
 <div class="service-icon">🧠</div>
 <h3 data-i18n="s7_title">神經康復治療</h3>
-<p data-i18n="s7_desc">中風、神經受損引致活動障礙，透過訓練改善肢體控制與協調。</p>
+<ul data-i18n="s7_list">
+<li>中風復康</li>
+<li>神經受損活動障礙</li>
+<li>訓練改善肢體控制</li>
+<li>提升肢體協調能力</li>
+</ul>
 </div>
 </div>
 </section>
-
 <section id="whyus">
-  <div class="section-title">
-    <h2 data-i18n="why_title">為什麼選擇本元</h2>
-    <p data-i18n="why_sub">專業團隊、個人化方案，用心守護每一位客人健康</p>
-  </div>
+<div class="section-title">
+<h2 data-i18n="why_title">為什麼選擇本元</h2>
+<p data-i18n="why_sub">專業團隊、個人化方案，用心守護每一位客人健康</p>
+</div>
 </section>
-
 <div class="modal-wrap" id="contactModal">
 <div class="modal">
 <h3 data-i18n="modal_title">即時聯絡諮詢</h3>
@@ -573,12 +617,12 @@ text-align: center;
 </div>
 </div>
 <footer>
-    <span data-i18n="copyright">© 2026 本元物理治療｜保留所有權利</span>
+<span data-i18n="copyright">© 2026 本元物理治療｜保留所有權利</span>
 </footer>
 <script>
 // 多語詞庫
 const i18n = {
-  "zh-Hant":{
+"zh-Hant":{
     logo:"本元<span>物理治療</span>",
     nav_home:"首頁",
     nav_service:"核心服務",
@@ -589,24 +633,24 @@ const i18n = {
     nav_contact:"即時聯絡",
     hero_title:"專業物理治療，<br/>守護你的<span>活動健康</span>",
     hero_desc:"本元物理治療，透過專業復健評估與治療方案，舒緩痛症、恢復機能，幫助你重拾日常活動能力。",
-    hero_btn1:"立即諮詢",
+    hero_btn1:"立即預約",
     hero_btn2:"探索服務",
     service_title:"核心服務",
     service_sub:"針對不同痛症與機能障礙，提供專業物理治療服務",
     s1_title:"肌肉骨骼痛症治療",
-    s1_desc:"肩頸痛、腰背痛、關節痛，透過手法治療、儀器治療舒緩不適。",
+    s1_list:"<li>肩頸痛</li><li>腰背痛</li><li>關節痛</li><li>手法治療、儀器治療舒緩不適</li>",
     s2_title:"運動損傷復康",
-    s2_desc:"拉傷、扭傷、術後復健，設計訓練計劃，逐步恢復運動能力。",
+    s2_list:"<li>拉傷、扭傷</li><li>術後復健</li><li>設計個人訓練計劃</li><li>逐步恢復運動能力</li>",
     s3_title:"長者平衡與防跌訓練",
-    s3_desc:"改善肢體力量、平衡感，降低跌倒風險，維持自主生活能力。",
+    s3_list:"<li>改善肢體力量</li><li>提升平衡感</li><li>降低跌倒風險</li><li>維持自主生活能力</li>",
     s4_title:"一對一評估諮詢",
-    s4_desc:"詳細檢查身體狀況，找出痛症根源，定制個人化治療方案。",
+    s4_list:"<li>詳細檢查身體狀況</li><li>找出痛症根源</li><li>定制個人化治療方案</li>",
     s5_title:"術後康復",
-    s5_desc:"手術後關節與軟組織復康，加快恢復活動能力，減少後遺症。",
+    s5_list:"<li>手術後關節復康</li><li>軟組織復康</li><li>加快恢復活動能力</li><li>減少後遺症</li>",
     s6_title:"鞋墊訂製",
-    s6_desc:"足部評估，訂製矯正鞋墊，改善扁平足、高足弓、足底痛。",
+    s6_list:"<li>足部專業評估</li><li>訂製矯正鞋墊</li><li>改善扁平足、高足弓</li><li>舒緩足底痛</li>",
     s7_title:"神經康復治療",
-    s7_desc:"中風、神經受損引致活動障礙，透過訓練改善肢體控制與協調。",
+    s7_list:"<li>中風復康</li><li>神經受損活動障礙</li><li>訓練改善肢體控制</li><li>提升肢體協調能力</li>",
     why_title:"為什麼選擇本元",
     why_sub:"專業團隊、個人化方案，用心守護每一位客人健康",
     modal_title:"即時聯絡諮詢",
@@ -618,7 +662,7 @@ const i18n = {
     modal_submit:"提交諮詢",
     copyright:"© 2026 本元物理治療｜保留所有權利"
   },
-  "zh-CN":{
+"zh-CN":{
     logo:"本元<span>物理治疗</span>",
     nav_home:"首页",
     nav_service:"核心服务",
@@ -629,24 +673,24 @@ const i18n = {
     nav_contact:"即时联络",
     hero_title:"专业物理治疗，<br/>守护你的<span>活动健康</span>",
     hero_desc:"本元物理治疗，透过专业复健评估与治疗方案，舒缓痛症、恢复机能，帮你重拾日常活动能力。",
-    hero_btn1:"立即咨询",
+    hero_btn1:"立即预约",
     hero_btn2:"探索服务",
     service_title:"核心服务",
     service_sub:"针对不同痛症与机能障碍，提供专业物理治疗服务",
     s1_title:"肌肉骨骼痛症治疗",
-    s1_desc:"肩颈痛、腰背痛、关节痛，透过手法治疗、仪器治疗舒缓不适。",
+    s1_list:"<li>肩颈痛</li><li>腰背痛</li><li>关节痛</li><li>手法治疗、仪器治疗舒缓不适</li>",
     s2_title:"运动损伤复康",
-    s2_desc:"拉伤、扭伤、术后复健，设计训练计划，逐步恢复运动能力。",
+    s2_list:"<li>拉伤、扭伤</li><li>术后复健</li><li>设计训练计划</li><li>逐步恢复运动能力</li>",
     s3_title:"长者平衡与防跌训练",
-    s3_desc:"改善肢体力量、平衡感，降低跌倒风险，维持自主生活能力。",
+    s3_list:"<li>改善肢体力量</li><li>提升平衡感</li><li>降低跌倒风险</li><li>维持自主生活能力</li>",
     s4_title:"一对一评估咨询",
-    s4_desc:"详细检查身体状况，找出痛症根源，定制个人化治疗方案。",
+    s4_list:"<li>详细检查身体状况</li><li>找出痛症根源</li><li>定制个人化治疗方案</li>",
     s5_title:"术后康复",
-    s5_desc:"手术后关节与软组织康复，加快恢复活动能力，减少后遗症。",
+    s5_list:"<li>手术后关节康复</li><li>软组织康复</li><li>加快恢复活动能力</li><li>减少后遗症</li>",
     s6_title:"鞋垫订制",
-    s6_desc:"足部评估，订制矫正鞋垫，改善扁平足、高足弓、足底痛。",
+    s6_list:"<li>足部专业评估</li><li>订制矫正鞋垫</li><li>改善扁平足、高足弓</li><li>舒缓足底痛</li>",
     s7_title:"神经康复治疗",
-    s7_desc:"中风、神经受损导致活动障碍，通过训练改善肢体控制与协调。",
+    s7_list:"<li>中风康复</li><li>神经受损活动障碍</li><li>训练改善肢体控制</li><li>提升肢体协调能力</li>",
     why_title:"为什么选择本元",
     why_sub:"专业团队、个性化方案，用心守护每一位客户健康",
     modal_title:"即时联络咨询",
@@ -658,7 +702,7 @@ const i18n = {
     modal_submit:"提交咨询",
     copyright:"© 2026 本元物理治疗｜保留所有权利"
   },
-  "en":{
+"en":{
     logo:"BenYuan <span>Physiotherapy</span>",
     nav_home:"Home",
     nav_service:"Services",
@@ -669,24 +713,24 @@ const i18n = {
     nav_contact:"Contact Us",
     hero_title:"Professional Physiotherapy,<br/>Safeguard Your <span>Mobility & Health</span>",
     hero_desc:"BenYuan Physiotherapy provides professional assessment and treatment to relieve pain and restore physical function.",
-    hero_btn1:"Consult Now",
+    hero_btn1:"Book Now",
     hero_btn2:"Our Services",
     service_title:"Core Services",
     service_sub:"Professional physiotherapy for pain and movement disorders",
     s1_title:"Musculoskeletal Pain Therapy",
-    s1_desc:"Shoulder, neck, back and joint pain treatment with manual therapy & equipment.",
+    s1_list:"<li>Shoulder & neck pain</li><li>Lower back pain</li><li>Joint pain</li><li>Manual & equipment therapy</li>",
     s2_title:"Sports Injury Rehabilitation",
-    s2_desc:"Sprain, strain and post-operation rehab, custom training plan for recovery.",
+    s2_list:"<li>Sprain & strain</li><li>Post-op rehabilitation</li><li>Custom training plan</li><li>Regain athletic ability</li>",
     s3_title:"Elderly Balance & Fall Prevention",
-    s3_desc:"Improve strength and balance, reduce fall risk and maintain independent living.",
+    s3_list:"<li>Improve muscle strength</li><li>Enhance balance</li><li>Reduce fall risk</li><li>Maintain independent living</li>",
     s4_title:"1-on-1 Assessment",
-    s4_desc:"Comprehensive evaluation to find the root cause of pain and custom treatment plan.",
+    s4_list:"<li>Comprehensive evaluation</li><li>Find root cause of pain</li><li>Custom treatment plan</li>",
     s5_title:"Post-surgery Rehabilitation",
-    s5_desc:"Joint & soft tissue rehab after surgery, speed up recovery and reduce sequelae.",
+    s5_list:"<li>Joint rehabilitation</li><li>Soft tissue recovery</li><li>Speed up mobility recovery</li><li>Minimize sequelae</li>",
     s6_title:"Custom Orthotic Insoles",
-    s6_desc:"Foot assessment, custom insoles for flat feet, high arch and plantar pain.",
+    s6_list:"<li>Professional foot assessment</li><li>Custom orthotic insoles</li><li>Flatfoot / high arch correction</li><li>Relieve plantar pain</li>",
     s7_title:"Neurological Rehabilitation",
-    s7_desc:"Rehab for stroke or nerve injury, improve limb control and coordination.",
+    s7_list:"<li>Stroke rehab</li><li>Nerve injury mobility disorder</li><li>Improve limb control</li><li>Enhance coordination</li>",
     why_title:"Why BenYuan",
     why_sub:"Professional team & personalized treatment plans for your health",
     modal_title:"Contact Consultation",
@@ -699,20 +743,24 @@ const i18n = {
     copyright:"© 2026 BenYuan Physiotherapy. All rights reserved."
   }
 };
-
+// 【探索服務 延時滾動函數】延遲300ms再滑動，可以自行修改數字
+function scrollWithDelay(){
+  setTimeout(()=>{
+    document.getElementById('services').scrollIntoView({behavior:'smooth'});
+  },500);
+}
 // 切換語言函數
 function setLang(langKey){
   document.querySelectorAll("[data-i18n]").forEach(el=>{
-    const key = el.getAttribute("data-i18n");
+const key = el.getAttribute("data-i18n");
     el.innerHTML = i18n[langKey][key];
   })
   document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
-    const key = el.getAttribute("data-i18n-placeholder");
+const key = el.getAttribute("data-i18n-placeholder");
     el.placeholder = i18n[langKey][key];
   })
   document.documentElement.lang = langKey;
 }
-
 // 漢堡選單控制
 const hamburgerBtn = document.querySelector('.hamburger');
 const navMenu = document.querySelector('nav ul');
@@ -723,11 +771,10 @@ hamburgerBtn.addEventListener('click', ()=>{
 document.querySelectorAll('nav a').forEach(link=>{
   link.addEventListener('click',()=>{
     navMenu.classList.remove('mobile-open');
-    // 原本頁內平滑滾動程式碼，註釋停用
-    // document.querySelector(link.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+// 原本頁內平滑滾動程式碼，註釋停用
+// document.querySelector(link.getAttribute('href')).scrollIntoView({behavior:'smooth'});
   })
 })
-
 // 語言下拉控制
 const langDropdown = document.querySelector(".lang-dropdown");
 const langBtn = document.querySelector(".lang-btn");
@@ -741,12 +788,11 @@ document.addEventListener("click",()=>{
 document.querySelectorAll(".lang-menu a").forEach(item=>{
   item.addEventListener("click",(e)=>{
     e.preventDefault();
-    const lang = item.getAttribute("data-lang");
+const lang = item.getAttribute("data-lang");
     setLang(lang);
     langDropdown.classList.remove("open");
   })
 })
-
 const modal = document.getElementById("contactModal");
 const header = document.querySelector("header");
 const serviceCards = document.querySelectorAll('.service-card');
@@ -754,44 +800,40 @@ const sectionTitle = document.querySelector('.section-title');
 // 導航連結清單，用於滾動偵測高亮
 const navLinks = document.querySelectorAll("nav a");
 const sections = document.querySelectorAll("section[id]");
-
 // 導航欄滾動背景變化
 window.addEventListener('scroll',()=>{
-  if(window.scrollY > 50){
+if(window.scrollY > 50){
     header.classList.add('scrolled');
   }else{
     header.classList.remove('scrolled');
   }
-
-  // 滾動偵測：自動高亮當前章節導航
-  let current = "";
+// 滾動偵測：自動高亮當前章節導航
+let current = "";
   sections.forEach(section => {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
-    if (window.scrollY >= (sectionTop - 200)) {
+const sectionTop = section.offsetTop;
+const sectionHeight = section.clientHeight;
+if (window.scrollY >= (sectionTop - 200)) {
       current = section.getAttribute('id');
     }
   });
   navLinks.forEach(link => {
     link.classList.remove("active");
-    // 因為現在是跨頁面，這段高亮功能會失效，可以之後再處理
-    if(link.getAttribute("href") === "#"+current){
+// 因為現在是跨頁面，這段高亮功能會失效，可以之後再處理
+if(link.getAttribute("href") === "#"+current){
       link.classList.add("active");
     }
   })
 })
-
 // 滾動動畫觀察器
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
-    if(entry.isIntersecting){
+if(entry.isIntersecting){
       entry.target.classList.add('show');
     }
   })
 },{threshold:0.15});
 observer.observe(sectionTitle);
 serviceCards.forEach(card=>observer.observe(card));
-
 // 彈窗控制
 function openModal() {
     modal.classList.add('active');
